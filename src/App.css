@@ -1,0 +1,52 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.block {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.price-block {
+  display: flex;
+}
+
+.price-without {
+  text-decoration: line-through;
+}
+
+.desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 3em;
+}
+
+.button-block {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 70px;
+}
+
+.progress {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal {
+  height: 100vh;
+  overflow-y: auto;
+}
