@@ -1,6 +1,8 @@
 body {
   margin: 0;
   padding: 0;
+  position: relative;
+  top: 0;
 }
 
 .block {
@@ -8,7 +10,6 @@ body {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  position: relative;
 }
 
 .card {
@@ -40,9 +41,6 @@ body {
 
 .progress {
   position: absolute;
-  display: flex;
-  justify-content: center;
-  width: 100vw;
   height: 100vh;
 }
 
