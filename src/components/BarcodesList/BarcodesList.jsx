@@ -3,7 +3,12 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions, CircularProgress } from "@mui/material";
+import {
+  Button,
+  CardActionArea,
+  CardActions,
+  CircularProgress,
+} from "@mui/material";
 import Detailed from "../Detailed/Detailed";
 import { useState } from "react";
 
@@ -66,7 +71,10 @@ const BarcodesList = () => {
         return {
           barcodes: {
             ...fetchMoreResult.barcodes,
-            edges: [...previousResult.barcodes.edges, ...fetchMoreResult.barcodes.edges],
+            edges: [
+              ...previousResult.barcodes.edges,
+              ...fetchMoreResult.barcodes.edges,
+            ],
           },
         };
       },
@@ -76,26 +84,46 @@ const BarcodesList = () => {
   return (
     <div>
       <ul className="block">
-        {data.barcodes.edges.map(({ node }, key) => (
-          <Card key={key} className="card" sx={{ width: 345 }}>
-            <CardActionArea>
-              <CardMedia component="img" height="140" image={node.images[0].url} alt={node.title} />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {node.title}
-                </Typography>
-                <Typography variant="body2" className="desc" color="text.secondary">
-                  {node.description}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button variant="contained" size="small" color="primary" onClick={() => handleOpen(node.id)}>
-                Подробнее
-              </Button>
-            </CardActions>
-          </Card>
-        ))}
+        {data.barcodes.edges.map(({ node }, key) => {
+          return (
+            <Card key={key} className="card" sx={{ width: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={
+                    "https://uno.kg/_next/image?url=https://api.uno.kg/" +
+                    node.images[0].url +
+                    "&w=256&q=75"
+                  }
+                  alt={node.title}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {node.title}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    className="desc"
+                    color="text.secondary"
+                  >
+                    {node.description}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+                <Button
+                  variant="contained"
+                  size="small"
+                  color="primary"
+                  onClick={() => handleOpen(node.id)}
+                >
+                  Подробнее
+                </Button>
+              </CardActions>
+            </Card>
+          );
+        })}
       </ul>
       {data.barcodes.pageInfo.hasNextPage && (
         <div className="button-block">
@@ -104,7 +132,9 @@ const BarcodesList = () => {
           </Button>
         </div>
       )}
-      {selectedId && <Detailed isOpen={open} handleClose={handleClose} id={selectedId} />}
+      {selectedId && (
+        <Detailed isOpen={open} handleClose={handleClose} id={selectedId} />
+      )}
     </div>
   );
 };
