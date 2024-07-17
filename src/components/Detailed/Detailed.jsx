@@ -3,6 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { CircularProgress } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -56,8 +57,13 @@ const Detailed = ({ isOpen, handleClose, id }) => {
     skip: !isOpen,
   });
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (loading)
+    return (
+      <div className="progress">
+        <CircularProgress />
+      </div>
+    );
+  if (error) return <h2>Упс! Что-то пошло не так</h2>;
 
   const barcode = data?.barcode;
 
