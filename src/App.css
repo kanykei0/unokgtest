@@ -47,10 +47,12 @@ body {
 .modal {
   height: 100vh;
   overflow-y: auto;
+  z-index: 10;
 }
 
 .modal-box {
   box-sizing: border-box;
+  z-index: 11;
 }
 
 .close-btn {
