@@ -3,7 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress, Container } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -74,48 +74,64 @@ const Detailed = ({ isOpen, handleClose, id }) => {
   );
 
   return (
-    <div>
+    <Container>
       <Modal className="modal" open={isOpen} onClose={handleClose}>
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {barcode?.title}
-          </Typography>
-          {barcode?.discountedPrice == null ? (
-            <Typography variant="body2" color="gray">
-              {barcode?.sellingPrice} сом
+        <Box sx={style} className="modal-box">
+          <div className="close-btn">
+            <Button onClick={handleClose}>
+              <Typography variant="h5">X</Typography>
+            </Button>
+          </div>
+          <div>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              {barcode?.title}
             </Typography>
-          ) : (
-            <div className="price-block">
-              <Typography variant="body2" color="secondary">
-                {barcode?.discountedPrice}
+            {barcode?.discountedPrice == null ? (
+              <Typography variant="body2" color="gray">
+                {barcode?.sellingPrice} сом
               </Typography>
-              <Typography variant="body2" className="price-without" color="gray">
-                {barcode?.sellingPrice}
-              </Typography>
-              <Typography variant="body2" color="secondary">
-                сом
+            ) : (
+              <div className="price-block">
+                <Typography variant="body2" color="secondary">
+                  {barcode?.discountedPrice}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  className="price-without"
+                  color="gray"
+                >
+                  {barcode?.sellingPrice}
+                </Typography>
+                <Typography variant="body2" color="secondary">
+                  сом
+                </Typography>
+              </div>
+            )}
+            <Typography variant="body1">
+              Тэги: {barcode?.tags !== null ? barcode?.tags : "пусто"}
+            </Typography>
+            <Typography variant="body1">
+              {barcode?.sizes.edges.length > 0 ? (
+                <>
+                  {barcode?.sizes.edges[0].node.name}:{" "}
+                  {barcode?.sizes.edges[0].node.value}
+                </>
+              ) : (
+                "кол-во: не указано"
+              )}
+            </Typography>
+            <div>
+              <Typography>
+                Категории: {renderCategory(barcode?.category)}
               </Typography>
             </div>
-          )}
-          <Typography variant="body1">Тэги: {barcode?.tags !== null ? barcode?.tags : "пусто"}</Typography>
-          <Typography variant="body1">
-            {barcode?.sizes.edges.length > 0 ? (
-              <>
-                {barcode?.sizes.edges[0].node.name}: {barcode?.sizes.edges[0].node.value}
-              </>
-            ) : (
-              "кол-во: не указано"
-            )}
-          </Typography>
-          <div>
-            <Typography>Категории: {renderCategory(barcode?.category)}</Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              {barcode?.description}
+            </Typography>
           </div>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {barcode?.description}
-          </Typography>
         </Box>
       </Modal>
-    </div>
+    </Container>
   );
 };
 

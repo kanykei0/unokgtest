@@ -2,11 +2,11 @@ body {
   margin: 0;
   padding: 0;
   position: relative;
-  top: 0;
 }
 
 .block {
-  margin-top: 50px;
+  margin: 50px 0 0 0;
+  padding: 0;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -47,4 +47,26 @@ body {
 .modal {
   height: 100vh;
   overflow-y: auto;
+}
+
+.modal-box {
+  box-sizing: border-box;
+}
+
+.close-btn {
+  display: flex;
+  justify-content: end;
+}
+
+@media (max-width: 1000px) {
+  .modal-box {
+    width: 100%;
+  }
+}
+
+@media (max-width: 780px) {
+  .block {
+    flex-direction: column;
+    align-items: center;
+  }
 }
